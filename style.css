@@ -10,7 +10,7 @@ canvas {
   background-color: rgb(51, 51, 51);
   width: 100%;
   height: 100%;
-  border: solid 10px red
+  border: solid 10px rgba(207, 0, 0, 0.877)
 }
 #tampaTudo {
   position: fixed;
@@ -24,11 +24,26 @@ canvas {
 #coisas {
   height: 300px;
   width: 300px;
-  background-color: white;
+  
 }
 input {
+  position: relative;
+  top: 50%;
+  transform: translateY(-100%); 
   background-color: transparent;
+  font-size: x-large;
   border: none;
   width: 100%;
-  
+  outline: none;
+  color: rgb(103, 219, 142);
+  border-bottom: solid 1px rgb(57, 165, 93);
+}
+input::placeholder {
+  color: rgba(57, 165, 93, 0.774);
+}
+#submeta-se {
+  border: none;
+  background-color: rgba(57, 165, 93, 0.089);
+  border-radius: 20px;
+  margin-top: 10px;
 }
