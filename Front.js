@@ -43,7 +43,7 @@ function AnimaplataformaCobrinha(positionX, positionY) {
   plataformaCobrinha.beginPath();
   //console.log(plataformaCobrinha);
   plataformaCobrinha.fillStyle = "green";
-  plataformaCobrinha.rotate(20 * Math.PI / 180);
+  //plataformaCobrinha.rotate(20 * Math.PI / 180); rotaciona
   plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 40, 24);
   plataformaCobrinha.closePath();
   for (let i = 0; i < player.tamanho; i++) {
