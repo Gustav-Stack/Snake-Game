@@ -6,11 +6,16 @@ body {
   width: 5000px;
   height: 5000px;
 }
-canvas {
+#plataforma {
   background-color: rgb(51, 51, 51);
-  width: 100%;
-  height: 100%;
   border: solid 10px rgba(207, 0, 0, 0.877)
+}
+#cobrinha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 600px;
+  width: 600px;
 }
 #tampaTudo {
   position: fixed;
@@ -46,4 +51,5 @@ input::placeholder {
   background-color: rgba(57, 165, 93, 0.089);
   border-radius: 20px;
   margin-top: 10px;
+  cursor: pointer;
 }
