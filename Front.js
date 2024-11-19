@@ -8,7 +8,7 @@ console.log(tecla);
 console.log(plataformaCobrinha);
 const player = {
   nome: String,
-  tamanho: 20,
+  tamanho: 1,
   position: [],
   rotation: Number
 };
@@ -41,21 +41,28 @@ submeta.addEventListener("click", (event) => {
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
-//
+//desenhar no canva a cobrinha
 function AnimaPlataformaCobrinha(teclaPressionada) {
   plataformaCobrinha.clearRect(0,0,5000,5000);
   if (teclaPressionada === "none") {
+
+
+    //inicia criação da cobrinha 
     plataformaCobrinha.beginPath();
     //console.log(plataformaCobrinha);
     plataformaCobrinha.fillStyle = "green";
     plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
     plataformaCobrinha.closePath();
+
+    //create body
     for (let i = 0; i < player.tamanho; i++) {
       plataformaCobrinha.beginPath();
       plataformaCobrinha.arc((player.position[0].x-12)-(i*6), player.position[0].y+12, 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
       console.log((player.position[0].x-40)-(i*6));
       plataformaCobrinha.fill();
     }
+
+    //atualização de players em tempo real
     if (players.length > 1) {
       for (p of players) {
         plataformaCobrinha.fillRect(p.position[0].x, p.position[0].y, 24, 24);
@@ -70,82 +77,58 @@ function AnimaPlataformaCobrinha(teclaPressionada) {
     }
     return;
   }
-  if (teclaPressionada === "ArrowUp") {
-    player.position[0].y -= 10
+
+var playerPosition;
+var playerPositionXy;
+
+  function keypress(playerPosition, playerPositionXy){
     plataformaCobrinha.beginPath();
-    //console.log(plataformaCobrinha);
+    playerPosition;
     plataformaCobrinha.fillStyle = "green";
     plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
     plataformaCobrinha.closePath();
     for (let i = 0; i < player.tamanho; i++) {
       plataformaCobrinha.beginPath();
-      plataformaCobrinha.arc((player.position[0].x+12), (player.position[0].y+36)+(i*6), 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
+      console.log(playerPositionXy);
+      plataformaCobrinha.arc(playerPositionXy.x , playerPositionXy.y+(i*6), 12, 0, (Math.PI/180)*360, true);
       console.log((player.position[0].x-40)-(i*6));
       plataformaCobrinha.fill();
     }
     return;
+  }
+  if (teclaPressionada === "ArrowUp") {
+    playerPosition = player.position[0].y -= 10
+    playerPositionXy = {x:player.position[0].x+12,y:player.position[0].y+36}
+    keypress(playerPosition, playerPositionXy)
   }
   if (teclaPressionada === "ArrowDown") {
-    player.position[0].y += 10
-    plataformaCobrinha.beginPath();
-    //console.log(plataformaCobrinha);
-    plataformaCobrinha.fillStyle = "green";
-    plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
-    plataformaCobrinha.closePath();
-    for (let i = 0; i < player.tamanho; i++) {
-      plataformaCobrinha.beginPath();
-      plataformaCobrinha.arc((player.position[0].x+12), (player.position[0].y-12)-(i*6), 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
-      console.log((player.position[0].x-40)-(i*6));
-      plataformaCobrinha.fill();
-    }
-    return;
+    playerPosition = player.position[0].y += 10
+    playerPositionXy = {x:player.position[0].x+12,y:player.position[0].y-12}
+    keypress(playerPosition, playerPositionXy)
   }
   if (teclaPressionada === "ArrowLeft") {
-    player.position[0].x -= 10
-    plataformaCobrinha.beginPath();
-    //console.log(plataformaCobrinha);
-    plataformaCobrinha.fillStyle = "green";
-    plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
-    plataformaCobrinha.closePath();
-    for (let i = 0; i < player.tamanho; i++) {
-      plataformaCobrinha.beginPath();
-      plataformaCobrinha.arc((player.position[0].x+36)+(i*6), player.position[0].y+12, 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
-      console.log((player.position[0].x-40)-(i*6));
-      plataformaCobrinha.fill();
-    }
-    return;
+    playerPosition = player.position[0].x -= 10
+    playerPositionXy = {x:player.position[0].x+36,y:player.position[0].y+12}
+    keypress(playerPosition, playerPositionXy)
+ 
   }
   if (teclaPressionada === "ArrowRight") {
-    player.position[0].y += 10
-    plataformaCobrinha.beginPath();
-    //console.log(plataformaCobrinha);
-    plataformaCobrinha.fillStyle = "green";
-    plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
-    plataformaCobrinha.closePath();
-    for (let i = 0; i < player.tamanho; i++) {
-      plataformaCobrinha.beginPath();
-      plataformaCobrinha.arc((player.position[0].x-12)-(i*6), player.position[0].y+12, 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
-      console.log((player.position[0].x-40)-(i*6));
-      plataformaCobrinha.fill();
-    }
-    return;
+    playerPosition = player.position[0].x -= 10
+    playerPositionXy = {x:player.position[0].x-12,y:player.position[0].y+12}
+    keypress(playerPosition, playerPositionXy)
+   
   }
-  // plataformaCobrinha.beginPath();
-  // //console.log(plataformaCobrinha);
-  // //plataformaCobrinha.rotate(20 * Math.PI / 180);
-  // plataformaCobrinha.fillStyle = "green";
-  // plataformaCobrinha.fillRect(player.position[0].x, player.position[0].y, 24, 24);
-  // plataformaCobrinha.closePath();
-  // for (let i = 0; i < player.tamanho; i++) {
-  //   plataformaCobrinha.beginPath();
-  //   plataformaCobrinha.arc((player.position[0].x-12)-(i*6), player.position[0].y+12, 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
-  //   console.log((player.position[0].x-40)-(i*6))
-  //   plataformaCobrinha.fill();
-  // }
-  // //teclaPressionada++; it's dont work
-  // //anima = requestAnimationFrame(AnimaPlataformaCobrinha);
+  
+  setInterval(() => {
+    
+    
+    keypress(playerPosition, playerPositionXy)
+    console.log("to rodando");
+    
+  }, 1000);
 }
-//
+
+
 window.addEventListener("keydown", (event) => {
   console.log(event, tecla);
   if (tecla === "none" && !tampaTudo) {
