@@ -6,7 +6,7 @@ let anima;
 let tecla;
 let teclaPressionada;
 let intervalo;
-console.log(tecla);
+// console.log(tecla);
 console.log(plataformaCobrinha);
 const player = {
   nome: String,
@@ -28,12 +28,12 @@ submeta.addEventListener("click", (event) => {
   }
   player.nome = tampaTudo.children[0].children[0].value;
   tampaTudo.parentNode.removeChild(tampaTudo);
-  console.log(player, document.getElementById("plataforma").width);
+  // console.log(player, document.getElementById("plataforma").width);
   player.position.unshift({
     x: getRandom(50, 1000),
     y: getRandom(50, 1000)
   });
-  console.log(player.position[0].x, player.position[0].y);
+  // console.log(player.position[0].x, player.position[0].y);
   window.scrollTo(player.position[0].x-200, player.position[0].y-200);
   tecla = "none";
   tampaTudo = false;
@@ -138,26 +138,7 @@ function AnimaPlataformaCobrinha() {
     plataformaCobrinha.clearRect(0,0,plataforma.width, plataforma.height);
 
  
-  
-    var headPositionX = player.position[0].x
-    var headPositionY = player.position[0].y
-    let  playerXY = player.position
-    
-    
-    playerXY.find((position) => {
-      console.log(position.x); 
-      
-      if (position.x === headPositionX && position.y === headPositionY) {
-          alert("perdeu")
-          return
-      }
-  });
-    
-    
-    if(headPositionY >= 1000 || headPositionX >= 1000){
-      alert("perdeu")
-      
-    }
+
     //
     console.log(player);
     for (let i = 0; i < player.tamanho-1; i++) {
@@ -178,15 +159,15 @@ function AnimaPlataformaCobrinha() {
       //   });
       // }
       //
-      console.log(player);
+      // console.log(player);
       let menos = player.tamanho - i - 1;
       plataformaCobrinha.beginPath();
       plataformaCobrinha.fillStyle = "blue";
-      console.log(playerPosition, menos);
+      // console.log(playerPosition, menos);
       plataformaCobrinha.arc(player.position[menos-1].x , player.position[menos-1].y, 12, 0, (Math.PI/180)*360, true);
-      console.log(player.position[menos-1].x, player.position[menos-1].y);
+      // console.log(player.position[menos-1].x, player.position[menos-1].y);
       plataformaCobrinha.fill();
-      console.log(player);
+      // console.log(player);
       player.position[menos].x = player.position[menos-1].x;
       player.position[menos].y = player.position[menos-1].y;
     }
@@ -216,6 +197,26 @@ function AnimaPlataformaCobrinha() {
   }
   //setando o intervalo para a função reiniciar.
   intervalo = setInterval(() => {
+      
+    var headPositionX = player.position[0].x;
+    var headPositionY = player.position[0].y;
+    let  playerXY = player.position
+
+    for (let i = 1; i < playerXY.length; i++) {
+      if (playerXY[i].x === headPositionX && playerXY[i].y === headPositionY) {
+        alert("perdeu")
+        return
+    }
+      
+    }
+
+
+    
+  //colisão com as bordas 
+    if(headPositionX <= 0 || headPositionX >= 1000 || headPositionY <= 0 || headPositionY >= 1000){
+      alert("perdeu")
+      
+    }
     //
     if (tecla === "ArrowUp") {
       teclaCheck.up();
@@ -229,13 +230,12 @@ function AnimaPlataformaCobrinha() {
     if (tecla === "ArrowRight") {
       teclaCheck.right();
     }
-    console.log("to rodando");
   }, 100);
 }
 
 
 window.addEventListener("keydown", (event) => {
-  console.log(event, tecla);
+  // console.log(event, tecla);
   if (tecla === "none" && !tampaTudo) {
     if ((event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight")) {
       event.preventDefault();
@@ -257,7 +257,7 @@ window.addEventListener("keydown", (event) => {
 });
 //
 window.addEventListener("keyup", (event) => {
-  console.log(event, "sla mano", tampaTudo);
+  // console.log(event, "sla mano", tampaTudo);
   if (tampaTudo) {
     return;
   }
