@@ -30,8 +30,8 @@ submeta.addEventListener("click", (event) => {
   tampaTudo.parentNode.removeChild(tampaTudo);
   console.log(player, document.getElementById("plataforma").width);
   player.position.unshift({
-    x: getRandom(50, 4850),
-    y: getRandom(50, 4850)
+    x: getRandom(100, plataforma.width-100),
+    y: getRandom(100, plataforma.height-100)
   });
   console.log(player.position[0].x, player.position[0].y);
   window.scrollTo(player.position[0].x-200, player.position[0].y-200);
@@ -160,26 +160,9 @@ function AnimaPlataformaCobrinha() {
     plataformaCobrinha.fillRect(playerPosition.x, playerPosition.y, 24, 24);
     plataformaCobrinha.closePath();
   }
-  //verificando se o intervalo tem algo para a função reiniciar
-  if (intervalo) {
-    clearInterval(intervalo);
-  }
-  //Executa uma vez antes de entrar no intervalo.
-  if (tecla === "ArrowUp") {
-      teclaCheck.up();
-  }
-  if (tecla === "ArrowDown") {
-    teclaCheck.down();
-  }
-  if (tecla === "ArrowLeft") {
-    teclaCheck.left();
-  }
-  if (tecla === "ArrowRight") {
-    teclaCheck.right();
-  }
-  //setando o intervalo para a função reiniciar.
-  intervalo = setInterval(() => {
-    //
+  //Função que checa tanto as setas, quanto a colisão.
+  function Check() {
+    //Setas
     if (tecla === "ArrowUp") {
       teclaCheck.up();
     }
@@ -192,13 +175,31 @@ function AnimaPlataformaCobrinha() {
     if (tecla === "ArrowRight") {
       teclaCheck.right();
     }
-    for (let i = 1; i < playerXY.length; i++) {
-      if (playerXY[i].x === headPositionX && playerXY[i].y === headPositionY) {
-        alert("perdeu")
-        return
+    //Colisão bordas
+    if (player.position[0].x < 0 || player.position[0].y < 0) {
+      window.location.reload();
     }
-      
+    if (player.position[0].x > plataforma.width-24 || player.position[0].y > plataforma.height-24) {
+      window.location.reload();
     }
+  }
+  //verificando se o intervalo tem algo para a função reiniciar
+  if (intervalo) {
+    clearInterval(intervalo);
+  }
+  //Executa uma vez antes de entrar no intervalo.
+  Check();
+  //setando o intervalo para a função reiniciar.
+  intervalo = setInterval(() => {
+    //
+    Check();
+    // for (let i = 1; i < playerXY.length; i++) {
+    //   if (playerXY[i].x === headPositionX && playerXY[i].y === headPositionY) {
+    //     alert("perdeu")
+    //     return
+    //   }
+    //  
+    // }
     console.log("to rodando");
   }, 10000);
 }
