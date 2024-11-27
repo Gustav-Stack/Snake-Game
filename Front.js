@@ -51,7 +51,7 @@ function AnimaPlataformaCobrinha() {
     //create body
     for (let i = 0; i < player.tamanho-1; i++) {
       plataformaCobrinha.beginPath();
-      plataformaCobrinha.fillStyle = "red";
+      plataformaCobrinha.fillStyle = "blue";
         plataformaCobrinha.arc((player.position[0].x)-(i*6), player.position[0].y+12, 12, 0, (Math.PI/180)*360, true);
         plataformaCobrinha.fill();
         player.position.push({
@@ -70,13 +70,19 @@ function AnimaPlataformaCobrinha() {
     //atualização de players em tempo real
     if (players.length > 1) {
       for (p of players) {
-        plataformaCobrinha.fillRect(p.position[0].x, p.position[0].y, 24, 24);
-        plataformaCobrinha.closePath();
         for (let i = 0; i < p.tamanho; i++) {
-          plataformaCobrinha.beginPath();
-          plataformaCobrinha.arc((p.position[0].x-12)-(i*6), p.position[0].y+12, 12, (Math.PI/180)*0, (Math.PI/180)*360, true);
-          console.log((p.position[0].x-40)-(i*6));
-          plataformaCobrinha.fill();
+          if (i === 0) {
+            plataformaCobrinha.beginPath();
+            plataformaCobrinha.fillStyle = "green";
+            plataformaCobrinha.fillRect(p.position.x, p.position[0].y, 24, 24);
+          }
+          else {
+            plataformaCobrinha.beginPath();
+            plataformaCobrinha.fillStyle = "red";
+            plataformaCobrinha.arc((p.position[i].x, p.position[i].y, 12, 0, (Math.PI/180)*360, true);
+            console.log((p.position[0].x-40)-(i*6));
+            plataformaCobrinha.fill();
+          }
         }
       } 
     }
